@@ -1,9 +1,13 @@
 package com.hoya.restaurant.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,21 +38,27 @@ public class CartController {
     // 장바구니에 메뉴 추가
     @PostMapping("/add")
     @Operation(summary = "장바구니에 메뉴 담기")
-    public String addMenuToCart(
+    public ResponseEntity<Map<String, Object>> addMenuToCart(
             @Parameter(description = "메뉴, 테이블 및 수량 정보 리스트", required = true) @RequestBody List<MenuCartRequestDTO> menuCartRequests, // 입력받음
             HttpSession session) {
         try {
-            // 각 Cart 항목에 동일하게 적용할 UUID 생성 (String으로 변환)
-            String commonCartUuid = UUID.randomUUID().toString(); // UUID -> String 변환
+            String commonCartUuid = UUID.randomUUID().toString();
 
             for (MenuCartRequestDTO request : menuCartRequests) {
-                // 각 요청별로 메뉴를 장바구니에 추가
                 cartService.addMenuToCart(request.getMenuUuid(), request.getTableUuid(), request.getQuantity(),
                         commonCartUuid, session);
             }
-            return "장바구니에 추가하였습니다.";
+
+            Map<String, Object> response = new HashMap<>();
+            response.put("cartUuid", commonCartUuid);
+            response.put("message", "장바구니에 추가하였습니다.");
+
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
-            return "Error: " + e.getMessage();
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("error", e.getMessage());
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
 

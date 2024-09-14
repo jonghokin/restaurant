@@ -27,13 +27,13 @@ public class OrderController {
     // 주문하기
     @PostMapping("/{uuid}")
     public ResponseEntity<Order> registerOrder(
-            @PathVariable ("uuid") String uuid,
+            @PathVariable("uuid") String uuid,
             HttpSession session) {
         try {
             Order order = orderService.orderRegist(uuid, session);
-            return ResponseEntity.ok(order);  // 성공 시 등록된 Order 반환
+            return ResponseEntity.ok(order);
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(null);  // 장바구니가 존재하지 않으면 400 에러
+            return ResponseEntity.badRequest().body(null);
         }
     }
 

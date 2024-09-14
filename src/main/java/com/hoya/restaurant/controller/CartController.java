@@ -33,9 +33,7 @@ public class CartController {
     // 장바구니에 메뉴 추가
     @PostMapping("/add")
     public String addMenuToCart(
-            @Parameter(description = "메뉴, 테이블 및 수량 정보 리스트", required = true) @RequestBody List<MenuCartRequestDTO> menuCartRequests, // JSON
-                                                                                                                                     // 배열로
-                                                                                                                                     // 입력받음
+            @Parameter(description = "메뉴, 테이블 및 수량 정보 리스트", required = true) @RequestBody List<MenuCartRequestDTO> menuCartRequests, // 입력받음
             HttpSession session) {
         try {
             // 각 Cart 항목에 동일하게 적용할 UUID 생성 (String으로 변환)

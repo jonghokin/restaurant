@@ -58,7 +58,7 @@ public class CartService {
         cart.setMenuUuid(menu.getUuid());
         cart.setTableUuid(tableInfo.getUuid());
         cart.setQuantity(quantity);
-        cart.setUuid(cartUuid); // 동일한 UUID 설정
+        cart.setUuid(cartUuid);
         cart.setCreatedAt(LocalDateTime.now());
 
         cartRepository.save(cart);
@@ -81,7 +81,7 @@ public class CartService {
 
             if (menuOptional.isPresent()) {
                 Menu menu = menuOptional.get();
-                int menuTotalPrice = menu.getPrice() * cart.getQuantity(); // 메뉴 가격 * 수량
+                int menuTotalPrice = menu.getPrice() * cart.getQuantity();
                 totalCartPrice += menuTotalPrice;
 
                 CartDetailDTO cartMenuInfo = new CartDetailDTO(menu.getName(), cart.getQuantity(), menuTotalPrice);
@@ -107,7 +107,6 @@ public class CartService {
 
     // 메뉴 수량 수정
     public void updateMenuQuantity(String menuUuid, String uuid, int quantity) throws Exception {
-        // 특정 테이블의 해당 메뉴가 장바구니에 있는지 확인
         Optional<Cart> cartOptional = cartRepository.findByMenuUuidAndUuid(menuUuid, uuid);
 
         if (cartOptional.isEmpty()) {

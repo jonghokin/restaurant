@@ -31,7 +31,7 @@ public class UserService {
             return ResponseEntity.ok(response);
         } else {
             response.put("message", "로그인 실패");
-            return ResponseEntity.status(401).body(response); // 401 Unauthorized
+            return ResponseEntity.status(401).body(response);
         }
     }
 }

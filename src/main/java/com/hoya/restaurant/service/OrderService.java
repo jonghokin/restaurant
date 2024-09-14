@@ -83,12 +83,11 @@ public class OrderService {
     private int calculateTotalPrice(List<Cart> cartList) {
         int totalPrice = 0;
 
-        // 각 Cart 항목에 대해 메뉴의 가격과 수량을 계산
         for (Cart cart : cartList) {
             Optional<Menu> menuOptional = menuRepository.findByUuid(cart.getMenuUuid());
             if (menuOptional.isPresent()) {
                 Menu menu = menuOptional.get();
-                totalPrice += menu.getPrice() * cart.getQuantity();  // 메뉴 가격 * 수량
+                totalPrice += menu.getPrice() * cart.getQuantity();
             } else {
                 throw new IllegalArgumentException("존재하지 않는 메뉴입니다.");
             }
@@ -96,6 +95,5 @@ public class OrderService {
 
         return totalPrice;
     }
-
 
 }

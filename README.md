@@ -1,7 +1,7 @@
 # restaurant
 
-[ 사용한 DB]
-mysql 8
+[ DB 정보]
+ - mysql 8
 
 [ git 주소 ]
 https://github.com/jonghokin/restaurant
@@ -19,6 +19,9 @@ http://localhost:8080/swagger-ui/index.html
 
 [ ERD 위치]
 restaurant/document/food.mwb
+
+[ Table 정보]
+restaurant/document/table.pdf
 
 [구동 파일]
 restaurant/document/~

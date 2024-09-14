@@ -15,7 +15,6 @@ public class CartId implements Serializable {
         this.menuUuid = menuUuid;
     }
 
-    // equals()와 hashCode() 메서드를 구현해야 합니다.
     @Override
     public boolean equals(Object o) {
         if (this == o)

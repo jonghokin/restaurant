@@ -18,6 +18,7 @@ import com.hoya.restaurant.dto.CartDetailResponseDTO;
 import com.hoya.restaurant.dto.MenuCartRequestDTO;
 import com.hoya.restaurant.service.CartService;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpSession;
@@ -32,6 +33,7 @@ public class CartController {
 
     // 장바구니에 메뉴 추가
     @PostMapping("/add")
+    @Operation(summary = "장바구니에 메뉴 담기")
     public String addMenuToCart(
             @Parameter(description = "메뉴, 테이블 및 수량 정보 리스트", required = true) @RequestBody List<MenuCartRequestDTO> menuCartRequests, // 입력받음
             HttpSession session) {
@@ -51,6 +53,7 @@ public class CartController {
     }
 
     @GetMapping("/{uuid}")
+    @Operation(summary = "장바구니 상세보기")
     public CartDetailResponseDTO getCartDetail(
             @Parameter(description = "cart테이블의 uuid", required = true) @PathVariable("uuid") String uuid) {
         try {
@@ -62,6 +65,7 @@ public class CartController {
 
     // 메뉴 삭제
     @DeleteMapping("/{uuid}/delete")
+    @Operation(summary = "장바구니에서 메뉴 삭제")
     public String deleteMenuFromCart(
             @Parameter(description = "테이블의 UUID", required = true) @PathVariable("uuid") String uuid,
 
@@ -76,6 +80,7 @@ public class CartController {
 
     // 메뉴 수량 수정
     @PutMapping("/{uuid}/update")
+    @Operation(summary = "장바구니에서 메뉴 수량 수정")
     public String updateMenuQuantity(
             @Parameter(description = "장바구니의 UUID", required = true) @PathVariable("uuid") String uuid,
 

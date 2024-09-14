@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hoya.restaurant.service.UserService;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpSession;
@@ -24,6 +25,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping()
+    @Operation(summary = "로그인")
     public ResponseEntity<Map<String, String>> login(
             @Parameter(description = "사용자의 uid", required = true) @RequestParam("uid") String uid,
 

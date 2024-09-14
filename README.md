@@ -6,7 +6,7 @@
 [ git 주소 ]
 https://github.com/jonghokin/restaurant
 
-[ 서버 주소 및 스웨거 ]
+[ 서버 주소 및 APi 스웨거 ]
 http://localhost:8080/swagger-ui/index.html
 
 [ 계정정보 ]
@@ -19,9 +19,6 @@ http://localhost:8080/swagger-ui/index.html
 
 [ ERD 위치]
 restaurant/document/food.mwb
-
-[ Table 정보]
-restaurant/document/table.pdf
 
 [구동 파일]
 restaurant/document/~

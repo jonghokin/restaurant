@@ -2,6 +2,8 @@ package com.hoya.restaurant.controller;
 
 import com.hoya.restaurant.entity.Order;
 import com.hoya.restaurant.service.OrderService;
+
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,8 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    @GetMapping("my")
+    @GetMapping("/my")
+    @Operation(summary = "나의 주문내역")
     public ResponseEntity<List<Order>> getUserOrders(HttpSession session) {
         List<Order> orders = orderService.getAllOrdersByUid(session);
         return ResponseEntity.ok(orders);
@@ -26,6 +29,7 @@ public class OrderController {
 
     // 주문하기
     @PostMapping("/{uuid}")
+    @Operation(summary = "주문하기")
     public ResponseEntity<Order> registerOrder(
             @PathVariable("uuid") String uuid,
             HttpSession session) {
@@ -39,6 +43,7 @@ public class OrderController {
 
     // 주문 상태 변경 (admin만 가능)
     @PutMapping("/{uuid}/status")
+    @Operation(summary = "주문 상태 변경(사장님만 가능)")
     public ResponseEntity<String> updateOrderStatus(
             @PathVariable("uuid") String uuid,
             @RequestParam("status") String status,
